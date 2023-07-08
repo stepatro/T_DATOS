@@ -35,7 +35,37 @@ for label in os.listdir(train_folder):
 Normalización de los datos de las imágenes en las listas train_images y val_images dividiéndolos por 255.0 y convirtiéndolos al tipo de dato 'float32'. 
 
 Se utiliza un modelo secuencial (Sequential) de tensorflow.keras.models.
+
+
+
+
 Se agregan capas convolucionales (Conv2D) con activación ReLU y capas de agrupamiento (MaxPooling2D).
+
+model = Sequential()
+model.add(Conv2D(32, (3, 3), activation='relu', input_shape=train_images.shape[1:]))
+model.add(MaxPooling2D((2, 2)))
+model.add(Conv2D(64, (3, 3), activation='relu'))
+model.add(MaxPooling2D((2, 2)))
+model.add(Conv2D(64, (3, 3), activation='relu'))
+model.add(Flatten())
+model.add(Dense(64, activation='relu'))
+model.add(Dense(len(label_encoder.classes_), activation='softmax'))
+
+Conv2D(32, (3, 3), activation='relu', input_shape=train_images.shape[1:]): Esta es la primera capa convolucional con 32 filtros de tamaño 3x3 y una función de activación ReLU. La capa espera un tamaño de entrada igual a train_images.shape[1:], que corresponde a la forma de una imagen de entrenamiento.
+
+MaxPooling2D((2, 2)): Esta capa de pooling realiza un muestreo máximo utilizando ventanas de tamaño 2x2 para reducir la dimensionalidad de los mapas de características.
+
+Conv2D(64, (3, 3), activation='relu'): Esta es la segunda capa convolucional con 64 filtros de tamaño 3x3 y una función de activación ReLU.
+
+MaxPooling2D((2, 2)): Otra capa de pooling que reduce aún más la dimensionalidad de los mapas de características.
+
+Conv2D(64, (3, 3), activation='relu'): La tercera capa convolucional con 64 filtros de tamaño 3x3 y una función de activación ReLU.
+
+Flatten(): Esta capa aplana los mapas de características en un vector unidimensional para ser utilizado como entrada en las capas totalmente conectadas.
+
+Dense(64, activation='relu'): Una capa totalmente conectada con 64 neuronas y una función de activación ReLU.
+
+Dense(len(label_encoder.classes_), activation='softmax'): La capa de salida con un número de neuronas igual al número de clases en tu problema. Utiliza la función de activación softmax para producir probabilidades para cada clase.
 
 se realiza una predicción utilizando un modelo (model) sobre un conjunto de imágenes de prueba (test_images). Luego, se obtienen las etiquetas predichas (predicted_labels) a partir de las salidas del modelo utilizando np.argmax() para obtener el índice del valor máximo a lo largo del eje 1.
 
