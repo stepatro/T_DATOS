@@ -42,3 +42,38 @@ se realiza una predicción utilizando un modelo (model) sobre un conjunto de im�
 
 Calculo de la matriz de confusión del modelo utilizando la función confusion_matrix de alguna biblioteca o módulo que no especificaste. La matriz de confusión es una herramienta útil para evaluar el rendimiento de un modelo de clasificación al mostrar la cantidad de muestras que se clasificaron correctamente e incorrectamente en cada clase.
 
+
+Calculo e impresion la matriz de confusión del error en el conjunto de entrenamiento. Se realiza una predicción en las imágenes de entrenamiento (train_images) utilizando el modelo (model), se obtienen las etiquetas predichas (train_predicted_labels), y luego se calcula la matriz de confusión comparando las etiquetas reales (train_labels_encoded) con las etiquetas predichas.
+
+train_predictions = model.predict(train_images)
+train_predicted_labels = np.argmax(train_predictions, axis=1)
+train_confusion = confusion_matrix(train_labels_encoded, train_predicted_labels)
+print('Matriz de confusión del error en entrenamiento:')
+print(train_confusion)
+
+
+En el código que proporcionaste, se realiza la predicción sobre las imágenes de prueba (test_images) utilizando el modelo (model). Luego, se obtienen las etiquetas predichas (test_predicted_labels) utilizando la función np.argmax() y se calcula la matriz de confusión del error en la prueba comparando las etiquetas reales codificadas (test_labels_encoded) con las etiquetas predichas.
+
+Aquí tienes un ejemplo de cómo podrías calcular y mostrar la matriz de confusión del error en la prueba:
+
+python
+Copy code
+from sklearn.metrics import confusion_matrix
+
+Realizar predicciones en las imágenes de prueba
+
+test_predictions = model.predict(test_images)
+Obtener las etiquetas predichas en el conjunto de prueba
+test_predicted_labels = np.argmax(test_predictions, axis=1)
+
+Calcular la matriz de confusión del error en prueba
+test_confusion = confusion_matrix(test_labels_encoded, test_predicted_labels)
+
+Mostrar la matriz de confusión del error en prueba
+print('Matriz de confusión del error en prueba:')
+print(test_confusion)
+(test_images), las etiquetas reales codificadas (test_labels_encoded), y un modelo previamente entrenado (model). Utilizamos las mismas funciones y enfoques mencionados anteriormente.
+
+Luego, realizamos las predicciones sobre las imágenes de prueba utilizando model.predict(), obtenemos las etiquetas predichas utilizando np.argmax(), y calculamos la matriz de confusión utilizando confusion_matrix().
+
+Se imprime la matriz de confusión del error en la prueba con print(test_confusion)
